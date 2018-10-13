@@ -4,13 +4,13 @@
 #
 Name     : perl-Array-Unique
 Version  : 0.08
-Release  : 3
+Release  : 4
 URL      : https://cpan.metacpan.org/authors/id/S/SZ/SZABGAB/Array-Unique-0.08.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/S/SZ/SZABGAB/Array-Unique-0.08.tar.gz
 Summary  : Tie-able array that allows only unique values
 Group    : Development/Tools
 License  : Artistic-1.0-Perl
-Requires: perl-Array-Unique-man
+BuildRequires : buildreq-cpan
 
 %description
 NAME
@@ -19,12 +19,13 @@ SYNOPSIS
 use Array::Unique;
 tie @a, 'Array::Unique';
 
-%package man
-Summary: man components for the perl-Array-Unique package.
-Group: Default
+%package dev
+Summary: dev components for the perl-Array-Unique package.
+Group: Development
+Provides: perl-Array-Unique-devel = %{version}-%{release}
 
-%description man
-man components for the perl-Array-Unique package.
+%description dev
+dev components for the perl-Array-Unique package.
 
 
 %prep
@@ -53,9 +54,9 @@ make TEST_VERBOSE=1 test
 %install
 rm -rf %{buildroot}
 if test -f Makefile.PL; then
-make pure_install PERL_INSTALL_ROOT=%{buildroot}
+make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
-./Build install --installdirs=site --destdir=%{buildroot}
+./Build install --installdirs=vendor --destdir=%{buildroot}
 fi
 find %{buildroot} -type f -name .packlist -exec rm -f {} ';'
 find %{buildroot} -depth -type d -exec rmdir {} 2>/dev/null ';'
@@ -64,8 +65,8 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/site_perl/5.26.1/Array/Unique.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Array/Unique.pm
 
-%files man
+%files dev
 %defattr(-,root,root,-)
 /usr/share/man/man3/Array::Unique.3
