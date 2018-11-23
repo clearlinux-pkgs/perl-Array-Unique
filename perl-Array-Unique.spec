@@ -4,7 +4,7 @@
 #
 Name     : perl-Array-Unique
 Version  : 0.08
-Release  : 4
+Release  : 5
 URL      : https://cpan.metacpan.org/authors/id/S/SZ/SZABGAB/Array-Unique-0.08.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/S/SZ/SZABGAB/Array-Unique-0.08.tar.gz
 Summary  : Tie-able array that allows only unique values
@@ -65,7 +65,7 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.26.1/Array/Unique.pm
+/usr/lib/perl5/vendor_perl/5.28.0/Array/Unique.pm
 
 %files dev
 %defattr(-,root,root,-)
