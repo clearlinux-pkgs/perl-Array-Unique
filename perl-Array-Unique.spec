@@ -4,7 +4,7 @@
 #
 Name     : perl-Array-Unique
 Version  : 0.08
-Release  : 8
+Release  : 9
 URL      : https://cpan.metacpan.org/authors/id/S/SZ/SZABGAB/Array-Unique-0.08.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/S/SZ/SZABGAB/Array-Unique-0.08.tar.gz
 Summary  : Tie-able array that allows only unique values
