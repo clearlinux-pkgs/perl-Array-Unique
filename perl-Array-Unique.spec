@@ -4,12 +4,13 @@
 #
 Name     : perl-Array-Unique
 Version  : 0.08
-Release  : 13
+Release  : 14
 URL      : https://cpan.metacpan.org/authors/id/S/SZ/SZABGAB/Array-Unique-0.08.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/S/SZ/SZABGAB/Array-Unique-0.08.tar.gz
 Summary  : Tie-able array that allows only unique values
 Group    : Development/Tools
 License  : Artistic-1.0-Perl
+Requires: perl-Array-Unique-perl = %{version}-%{release}
 BuildRequires : buildreq-cpan
 
 %description
@@ -23,19 +24,30 @@ tie @a, 'Array::Unique';
 Summary: dev components for the perl-Array-Unique package.
 Group: Development
 Provides: perl-Array-Unique-devel = %{version}-%{release}
+Requires: perl-Array-Unique = %{version}-%{release}
 
 %description dev
 dev components for the perl-Array-Unique package.
 
 
+%package perl
+Summary: perl components for the perl-Array-Unique package.
+Group: Default
+Requires: perl-Array-Unique = %{version}-%{release}
+
+%description perl
+perl components for the perl-Array-Unique package.
+
+
 %prep
 %setup -q -n Array-Unique-0.08
+cd %{_builddir}/Array-Unique-0.08
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
+export LANG=C.UTF-8
 if test -f Makefile.PL; then
 %{__perl} Makefile.PL
 make  %{?_smp_mflags}
@@ -45,7 +57,7 @@ else
 fi
 
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
@@ -65,8 +77,11 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.28.2/Array/Unique.pm
 
 %files dev
 %defattr(-,root,root,-)
 /usr/share/man/man3/Array::Unique.3
+
+%files perl
+%defattr(-,root,root,-)
+/usr/lib/perl5/vendor_perl/5.30.1/Array/Unique.pm
